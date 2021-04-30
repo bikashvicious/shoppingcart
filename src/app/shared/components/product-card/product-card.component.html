@@ -1,0 +1,59 @@
+<div *ngIf="product.title" class="card" style="background-size: cover">
+  <img
+    *ngIf="product.imageUrl"
+    class="card-img-top"
+    src="{{ product.imageUrl }}"
+    alt="{{ product.title }}"
+    style="height: 12rem"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ product.title }}</h5>
+    <p class="card-text">{{ product.price | currency: "NPR ":true }}</p>
+  </div>
+  <div class="card-footer" *ngIf="showActions && shoppingCart">
+    <ng-template #anonymousUser>
+      <button
+        *ngIf="shoppingCart.getQuantity(product) === 0; else updateQuantity"
+        (click)="addToCart()"
+        class="btn btn-secondary btn-block"
+      >
+        Add to Cart
+      </button>
+    </ng-template>
+    <div *ngIf="appUser$ as appUser">
+      <div *ngIf="!appUser.isAdmin">
+        <button
+          *ngIf="shoppingCart.getQuantity(product) === 0; else updateQuantity"
+          (click)="addToCart()"
+          class="btn btn-secondary btn-block"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+    <div *ngIf="appUser$ as appUser ; else anonymousUser">
+          <!-- <button *ngIf="appUser.isAdmin"
+          (click)="addToCart()"
+          class="btn btn-secondary btn-block">
+          Details
+      </button> -->
+        </div>
+  </div>
+  <ng-template #updateQuantity>
+    <div class="row no-gutters">
+      <div class="col-2">
+          <button
+              (click)="removeFromCart()"
+              class="btn btn-secondary btn-block">-</button>
+      </div>
+      <div class="col text-center">
+          {{ shoppingCart.getQuantity(product) }} in cart
+      </div>
+      <div class="col-2">
+          <button
+              (click)="addToCart()"
+              class="btn btn-secondary btn-block">+</button>
+      </div>
+  </div>
+  </ng-template>
+</div>

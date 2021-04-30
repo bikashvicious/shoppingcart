@@ -1,0 +1,62 @@
+<!-- <h2>Shipping</h2>
+<div class="row" *ngIf="cart$ | async as cart">
+  <div class="col-6">
+    <app-shipping-form [cart]="cart"></app-shipping-form>
+  </div>
+  <div class="col-6">
+      <app-shopping-cart-summary [cart]="cart"></app-shopping-cart-summary>
+  </div>
+</div> -->
+
+<div class="container-fluid" >
+  <div class="row" *ngIf="cart$ | async as cart">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['/shopping-cart']">
+              <i class="fas fa-plus"></i>
+              <span data-feather="home"></span>
+              Shopping Cart <span class="sr-only"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/my/profile']">
+              <i class="fas fa-bars"></i>
+              <span data-feather="shopping-cart"></span>
+              Profile
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/my/orders']">
+              <i class="fas fa-bars"></i>
+              <span data-feather="shopping-cart"></span>
+              My Order
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" style="padding: bottom 40px;">
+
+      <h2>Orders</h2>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Client Dashboard</a></li>
+          <li class="breadcrumb-item"><a [routerLink]='["/shopping-cart"]'>Shopping cart</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Shipping</li>
+        </ol>
+      </nav>
+<div class="row">
+  <div class="col-6">
+    <app-shipping-form [cart]="cart"></app-shipping-form>
+  </div>
+  <div class="col-6">
+      <app-shopping-cart-summary [cart]="cart"></app-shopping-cart-summary>
+  </div>
+</div>
+
+    </main>
+  </div>
+</div>

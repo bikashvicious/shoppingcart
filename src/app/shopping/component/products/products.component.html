@@ -1,0 +1,40 @@
+<div class="back-img" style="height: 427px">
+  <div class="container">
+    <div>
+      <div class="col-3">
+        <product-filter [category]="category"></product-filter>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngb-carousel *ngIf="hotItem">
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper text-center animated tada "  >
+      <figure>
+        <img src="{{hotItem}}" alt="hot item" class="border border-warning  " style="padding-bottom: 40px; padding-top: 40px;">
+        <figcaption class="capti"  >HOT ITEMS</figcaption>
+    </figure>
+    </div>
+    <!-- <div class="carousel-caption ">
+      <h2 style="color: red;"   style="width: 6rem;">HOT ITEM</h2>
+    </div> -->
+  </ng-template>
+</ngb-carousel>
+
+
+<div style="background-color: 	#e4e5e6;" >
+  <div class="container pt-4">
+    <div class="row" *ngIf="cart$ | async as cart">
+      <ng-container *ngFor="let product of filteredProducts; let i = index">
+        <div class="col-3" style="padding-bottom: 50px;">
+          <product-card
+            [product]="product"
+            [shopping-cart]="cart"
+          ></product-card>
+        </div>
+        <!-- <div *ngIf="(i + 1) % 2 == 0" class="w-100"></div> -->
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['/admin/products']">
+              <i class="fas fa-plus"></i>
+              <span data-feather="home"></span>
+              Add Product <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin/orders']">
+              <i class="fas fa-eye"></i>
+              <span data-feather="file"></span>
+              Manage Orders
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/admin/client-details']">
+              <i class="fas fa-bars"></i>
+              <span data-feather="shopping-cart"></span>
+              Client Details
+            </a>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+      <div>
+        <div style="padding-top: 5%">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a [routerLink]="['/admin/products']">Admin Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Add Product</li>
+            </ol>
+          </nav>
+
+          <p>
+            <input
+              #query
+              (keyup)="filter(query.value)"
+              type="text"
+              class="form-control"
+              placeholder="Search..."
+            />
+          </p>
+
+          <p>
+            <a routerLink="/admin/products/new" class="btn btn-primary"
+              ><i class="fas fa-plus"></i>
+              New Product</a
+            >
+          </p>
+
+          <table
+            class="table table-bordered table-striped"
+            [svData]="filteredProducts"
+            #sv="svDataTable"
+            [svRowsOnPage]="5"
+            svSortBy="name"
+            svSortOrder="asc"
+          >
+            <thead>
+              <tr>
+                <th><sv-default-sorter by="title">Title</sv-default-sorter></th>
+                <th>Price</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of sv.data">
+                <td>{{ t.title }}</td>
+                <td>{{ t.price }}</td>
+                <td>
+                  <a class="btn btn-primary btn-sm" [routerLink]="['/admin/products/', t.key]">Edit</a>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4">
+                  <sv-bootstrap-paginator
+                    [rowsOnPageSet]="[5, 10, 25]"
+                  ></sv-bootstrap-paginator>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

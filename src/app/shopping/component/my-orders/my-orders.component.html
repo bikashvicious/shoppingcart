@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/shopping-cart']">
+              <i class="fas fa-plus"></i>
+              <span data-feather="home"></span>
+              Shopping Cart <span class="sr-only"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/my/profile']">
+              <i class="fas fa-bars"></i>
+              <span data-feather="shopping-cart"></span>
+              Profile
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" [routerLink]="['/my/orders']">
+              <i class="fas fa-bars"></i>
+              <span data-feather="shopping-cart"></span>
+              My Orders
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"  style="padding-bottom: 40px;">
+      <h2>Orders</h2>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Client Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">My orders</li>
+        </ol>
+      </nav>
+      <table class="table table-bordered" *ngIf="orders">
+        <thead class="thead-light">
+          <th>Order date </th>
+          <th>Items</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </thead>
+        <tr *ngFor="let order of orders; let i = index">
+          <td>{{ order.datePlaced | date }}</td>
+          <td>
+            <ng-container *ngFor="let item of orders[i].items"
+              ><ul>
+                <li>
+                  {{ item.product.title }}
+                </li>
+              </ul>
+            </ng-container>
+          </td>
+          <td>
+            <ng-container *ngFor="let item of orders[i].items"
+              >
+                  {{ item.quantity }} <br> <br>
+            </ng-container>
+          </td>
+          <td>
+            <ng-container *ngFor="let item of orders[i].items">
+                RS {{ item.totalPrice }} <br> <br>
+          </ng-container>
+          </td>
+        </tr>
+      </table>
+    </main>
+  </div>
+</div>
